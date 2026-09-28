@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-scouting}
+      POSTGRES_USER: ${POSTGRES_USER:-scouting}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-scouting}
+    ports:
+      - "5432:5432"
+    volumes:
+      - scouting-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-local}
+      DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-scouting}
+      DB_USERNAME: ${POSTGRES_USER:-scouting}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-scouting}
+    ports:
+      - "8080:8080"
+
+volumes:
+  scouting-postgres:
+

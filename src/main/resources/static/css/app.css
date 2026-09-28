@@ -1,0 +1,133 @@
+:root {
+    color-scheme: dark;
+    --surface: #111714;
+    --surface-raised: #18201c;
+    --line: #2d3932;
+    --accent: #65d68a;
+    --muted: #a4afa8;
+}
+
+body {
+    min-height: 100vh;
+    background: #0b0f0d;
+    color: #f4f7f5;
+    font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+.navbar-brand {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.navbar {
+    background: rgba(11, 15, 13, 0.88);
+    backdrop-filter: blur(12px);
+}
+
+.hero {
+    background:
+        radial-gradient(circle at 80% 20%, rgba(101, 214, 138, 0.18), transparent 35%),
+        linear-gradient(rgba(101, 214, 138, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(101, 214, 138, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, #101713 0%, #0b0f0d 100%);
+    background-size: auto, 42px 42px, 42px 42px, auto;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.text-secondary {
+    color: var(--muted) !important;
+}
+
+.score-card,
+.feature-card,
+.login-card {
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, rgba(24, 32, 28, 0.96), rgba(16, 23, 19, 0.96));
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+}
+
+.score-card {
+    transform: rotate(1.2deg);
+    animation: card-entry 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.feature-card {
+    transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(101, 214, 138, 0.55);
+}
+
+.score {
+    color: var(--accent);
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.feature-number {
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+}
+
+.login-page {
+    background:
+        radial-gradient(circle at 20% 10%, rgba(101, 214, 138, 0.16), transparent 30%),
+        #0b0f0d;
+}
+
+.login-card {
+    max-width: 32rem;
+}
+
+.form-control {
+    border-color: var(--line);
+    background: #0d1310;
+    color: #fff;
+}
+
+.form-control:focus {
+    border-color: var(--accent);
+    background: #0d1310;
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(101, 214, 138, 0.14);
+}
+
+@keyframes card-entry {
+    from {
+        opacity: 0;
+        transform: translateY(24px) rotate(1.2deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(1.2deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

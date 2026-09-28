@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: scout-match
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/scouting}
+    username: ${DB_USERNAME:scouting}
+    password: ${DB_PASSWORD:scouting}
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  thymeleaf:
+    cache: false
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+info:
+  app:
+    name: ScoutMatch
+    description: Sistema de búsqueda y evaluación de jugadores de fútbol
+    version: 0.1.0
+
