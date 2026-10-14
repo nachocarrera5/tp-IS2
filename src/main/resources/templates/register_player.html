@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registrar jugador · ScoutMatch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark border-bottom border-light-subtle">
+    <div class="container">
+        <a class="navbar-brand fw-semibold" href="/">ScoutMatch</a>
+        <div class="d-flex align-items-center gap-3">
+            <span class="small text-secondary">Registro de scouting</span>
+            <a class="btn btn-sm btn-outline-light" href="/">Volver</a>
+        </div>
+    </div>
+</nav>
+
+<main class="register-page py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="mb-4">
+                    <span class="eyebrow">BASE DE JUGADORES</span>
+                    <h1 class="display-5 fw-bold mt-3 mb-2">Registrar jugador observado</h1>
+                    <p class="lead text-secondary mb-0">
+                        Incorporá los datos básicos del jugador para comenzar a construir su perfil de scouting.
+                    </p>
+                </div>
+
+                <form class="register-card p-4 p-md-5">
+                    <div class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">01</span>
+                            <div>
+                                <h2 class="h4 mb-1">Información personal</h2>
+                                <p class="text-secondary small mb-0">Datos principales para identificar al jugador.</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <label class="form-label" for="full-name">Nombre completo <span class="required-mark">*</span></label>
+                                <input class="form-control form-control-lg" id="full-name" type="text" placeholder="Ej. Julián Álvarez">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="birth-date">Fecha de nacimiento <span class="required-mark">*</span></label>
+                                <input class="form-control form-control-lg" id="birth-date" type="date">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="nationality">Nacionalidad</label>
+                                <input class="form-control" id="nationality" type="text" placeholder="Ej. Argentina">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="external-id">Identificador externo</label>
+                                <input class="form-control" id="external-id" type="text" placeholder="Opcional">
+                                <div class="form-text">Podés usar el ID de una fuente externa.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">02</span>
+                            <div>
+                                <h2 class="h4 mb-1">Contexto deportivo</h2>
+                                <p class="text-secondary small mb-0">Información actual del club y la competencia.</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label" for="club">Club actual</label>
+                                <input class="form-control form-control-lg" id="club" type="text" placeholder="Ej. River Plate">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="league">Liga</label>
+                                <input class="form-control form-control-lg" id="league" type="text" placeholder="Ej. Primera División">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="primary-position">Posición principal <span class="required-mark">*</span></label>
+                                <select class="form-select form-select-lg" id="primary-position">
+                                    <option selected disabled>Seleccioná una posición</option>
+                                    <option>Arquero</option>
+                                    <option>Lateral derecho</option>
+                                    <option>Lateral izquierdo</option>
+                                    <option>Defensor central</option>
+                                    <option>Volante defensivo</option>
+                                    <option>Volante central</option>
+                                    <option>Volante ofensivo</option>
+                                    <option>Extremo derecho</option>
+                                    <option>Extremo izquierdo</option>
+                                    <option>Delantero centro</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="preferred-foot">Pie dominante</label>
+                                <select class="form-select form-select-lg" id="preferred-foot">
+                                    <option selected disabled>Seleccioná una opción</option>
+                                    <option>Derecho</option>
+                                    <option>Izquierdo</option>
+                                    <option>Ambos</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="secondary-positions">Posiciones secundarias</label>
+                                <select class="form-select" id="secondary-positions" multiple>
+                                    <option>Arquero</option>
+                                    <option>Lateral derecho</option>
+                                    <option>Lateral izquierdo</option>
+                                    <option>Defensor central</option>
+                                    <option>Volante defensivo</option>
+                                    <option>Volante central</option>
+                                    <option>Volante ofensivo</option>
+                                    <option>Extremo derecho</option>
+                                    <option>Extremo izquierdo</option>
+                                    <option>Delantero centro</option>
+                                </select>
+                                <div class="form-text">Podés seleccionar más de una posición con ⌘ o Ctrl.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <p class="small text-secondary mb-0">
+                            <span class="required-mark">*</span> Campos obligatorios
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a class="btn btn-outline-light px-4" href="/">Cancelar</a>
+                            <a class="btn btn-outline-success px-4" href="/score">Puntuar jugador</a>
+                            <button class="btn btn-success px-4" type="button">Guardar jugador</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

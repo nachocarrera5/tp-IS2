@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Puntuar jugador · ScoutMatch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark border-bottom border-light-subtle">
+    <div class="container">
+        <a class="navbar-brand fw-semibold" href="/">ScoutMatch</a>
+        <div class="d-flex align-items-center gap-3">
+            <span class="small text-secondary">Evaluación de scouting</span>
+            <a class="btn btn-sm btn-outline-light" href="/">Volver</a>
+        </div>
+    </div>
+</nav>
+
+<main class="register-page py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="mb-4">
+                    <span class="eyebrow">EVALUACIÓN DE JUGADORES</span>
+                    <h1 class="display-5 fw-bold mt-3 mb-2">Puntuar jugador observado</h1>
+                    <p class="lead text-secondary mb-0">
+                        Seleccioná un jugador registrado y cargá tu evaluación sobre su rendimiento.
+                    </p>
+                </div>
+
+                <form class="register-card p-4 p-md-5">
+                    <div class="form-section pt-0 border-0 mt-0">
+                        <div class="section-heading">
+                            <span class="section-number">01</span>
+                            <div>
+                                <h2 class="h4 mb-1">Jugador y observación</h2>
+                                <p class="text-secondary small mb-0">Elegí el jugador y contextualizá la observación.</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <label class="form-label" for="player">Jugador registrado <span class="required-mark">*</span></label>
+                                <select class="form-select form-select-lg" id="player">
+                                    <option selected disabled>Seleccioná un jugador</option>
+                                    <option>Julián Álvarez · Delantero centro · River Plate</option>
+                                    <option>Valentín Barco · Lateral izquierdo · Brighton</option>
+                                    <option>Thiago Almada · Volante ofensivo · Botafogo</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="observation-date">Fecha de observación <span class="required-mark">*</span></label>
+                                <input class="form-control form-control-lg" id="observation-date" type="date">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="opponent">Rival</label>
+                                <input class="form-control" id="opponent" type="text" placeholder="Ej. Boca Juniors">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="competition">Competencia</label>
+                                <input class="form-control" id="competition" type="text" placeholder="Ej. Liga Profesional">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="observed-position">Posición observada <span class="required-mark">*</span></label>
+                                <select class="form-select" id="observed-position">
+                                    <option selected disabled>Seleccioná una posición</option>
+                                    <option>Arquero</option>
+                                    <option>Defensor central</option>
+                                    <option>Lateral izquierdo</option>
+                                    <option>Volante central</option>
+                                    <option>Volante ofensivo</option>
+                                    <option>Extremo</option>
+                                    <option>Delantero centro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">02</span>
+                            <div>
+                                <h2 class="h4 mb-1">Valoración deportiva</h2>
+                                <p class="text-secondary small mb-0">Asigná un puntaje de 1 a 10 para cada atributo.</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="score-input">
+                                    <label class="form-label" for="passing">Pase</label>
+                                    <div class="input-group">
+                                        <input class="form-range" id="passing" type="range" min="1" max="10" value="7">
+                                        <span class="score-value">7</span>
+                                    </div>
+                                    <div class="score-scale"><span>1 · Bajo</span><span>10 · Excelente</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="score-input">
+                                    <label class="form-label" for="control">Control</label>
+                                    <div class="input-group">
+                                        <input class="form-range" id="control" type="range" min="1" max="10" value="7">
+                                        <span class="score-value">7</span>
+                                    </div>
+                                    <div class="score-scale"><span>1 · Bajo</span><span>10 · Excelente</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="score-input">
+                                    <label class="form-label" for="vision">Visión</label>
+                                    <div class="input-group">
+                                        <input class="form-range" id="vision" type="range" min="1" max="10" value="8">
+                                        <span class="score-value">8</span>
+                                    </div>
+                                    <div class="score-scale"><span>1 · Bajo</span><span>10 · Excelente</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="score-input">
+                                    <label class="form-label" for="recovery">Recuperación</label>
+                                    <div class="input-group">
+                                        <input class="form-range" id="recovery" type="range" min="1" max="10" value="6">
+                                        <span class="score-value">6</span>
+                                    </div>
+                                    <div class="score-scale"><span>1 · Bajo</span><span>10 · Excelente</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="score-input">
+                                    <label class="form-label" for="speed">Velocidad</label>
+                                    <div class="input-group">
+                                        <input class="form-range" id="speed" type="range" min="1" max="10" value="8">
+                                        <span class="score-value">8</span>
+                                    </div>
+                                    <div class="score-scale"><span>1 · Bajo</span><span>10 · Excelente</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="score-input">
+                                    <label class="form-label" for="stamina">Resistencia</label>
+                                    <div class="input-group">
+                                        <input class="form-range" id="stamina" type="range" min="1" max="10" value="7">
+                                        <span class="score-value">7</span>
+                                    </div>
+                                    <div class="score-scale"><span>1 · Bajo</span><span>10 · Excelente</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">03</span>
+                            <div>
+                                <h2 class="h4 mb-1">Informe del scout</h2>
+                                <p class="text-secondary small mb-0">Dejá un registro cualitativo de la observación.</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label" for="strengths">Fortalezas</label>
+                                <textarea class="form-control" id="strengths" rows="4" placeholder="¿Qué aspectos se destacaron?"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="weaknesses">Debilidades</label>
+                                <textarea class="form-control" id="weaknesses" rows="4" placeholder="¿Qué aspectos debería mejorar?"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="general-comment">Comentario general</label>
+                                <textarea class="form-control" id="general-comment" rows="4" placeholder="Agregá cualquier contexto relevante de la observación"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <p class="small text-secondary mb-0">
+                            <span class="required-mark">*</span> Campos obligatorios
+                        </p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a class="btn btn-outline-light px-4" href="/">Cancelar</a>
+                            <button class="btn btn-success px-4" type="button">Guardar evaluación</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    document.querySelectorAll('.form-range').forEach((range) => {
+        const value = range.closest('.input-group').querySelector('.score-value');
+        range.addEventListener('input', () => {
+            value.textContent = range.value;
+        });
+    });
+</script>
+</body>
+</html>

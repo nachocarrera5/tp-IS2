@@ -18,5 +18,14 @@ public class HomeController {
     String login() {
         return "login";
     }
-}
 
+    @GetMapping("/register_player")
+    String registerPlayer() {
+        return "register_player";
+    }
+
+    @GetMapping("/score")
+    String scorePlayer() {
+        return "score_player";
+    }
+}
