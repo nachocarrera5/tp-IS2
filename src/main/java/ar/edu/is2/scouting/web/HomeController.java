@@ -22,7 +22,6 @@ public class HomeController {
     String login() {
         return "login";
     }
-
     @GetMapping("/app")
     String dashboard(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
@@ -40,5 +39,15 @@ public class HomeController {
     private long count(String table) {
         return jdbc.queryForObject("select count(*) from " + table, Long.class);
     }
-}
 
+    // Prototipos visuales aportados por el equipo; los flujos funcionales viven en /players.
+    @GetMapping("/register_player")
+    String registerPlayer() {
+        return "register_player";
+    }
+
+    @GetMapping("/score")
+    String scorePlayer() {
+        return "score_player";
+    }
+}
