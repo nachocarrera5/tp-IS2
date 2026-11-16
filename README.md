@@ -6,7 +6,9 @@ El sistema construye perfiles desde evaluaciones de scouts y calcula un ranking 
 
 ## Estado
 
-Base técnica inicial. Incluye arquitectura, esquema de datos, seguridad de demostración, motor de compatibilidad, pruebas, contenedores y CI.
+MVP funcional. Incluye gestión de jugadores, importación CSV controlada, evaluaciones versionadas,
+necesidades deportivas, ranking explicable, seguimiento de candidatos, seguridad por roles,
+pruebas automatizadas, contenedores y CI.
 
 La especificación funcional acordada está en [SPEC.md](SPEC.md). Antes de implementar una funcionalidad, el equipo debe verificar que sea consistente con ese documento.
 
@@ -16,10 +18,10 @@ La especificación funcional acordada está en [SPEC.md](SPEC.md). Antes de impl
 - Spring Boot 4.1
 - Spring MVC + Thymeleaf
 - Spring Security
-- Spring Data JPA
+- Spring JDBC
 - PostgreSQL + Flyway
 - Maven
-- Bootstrap
+- Thymeleaf + CSS propio
 - JUnit 5
 
 ## Inicio rápido con Docker
@@ -41,7 +43,16 @@ Usuarios de demostración:
 | Coordinador | `coordinador@demo.local` | `demo1234` |
 | Scout | `scout@demo.local` | `demo1234` |
 
-Las cuentas son únicamente para desarrollo local. El registro libre de roles definido en el MVP todavía no está implementado.
+Las cuentas son únicamente para desarrollo local. También se puede registrar una cuenta nueva desde la pantalla de acceso y elegir uno de los tres roles del MVP.
+
+## Flujos disponibles
+
+- El coordinador crea y edita jugadores, importa CSV, define necesidades con filtros y criterios,
+  ejecuta rankings y administra el seguimiento de candidatos.
+- El scout carga borradores, los confirma y corrige una evaluación mediante una nueva versión.
+- El director técnico consulta jugadores, rankings, explicaciones y candidatos sin modificar datos.
+- El perfil de cada jugador promedia primero las observaciones de cada scout y luego los promedios
+  entre scouts, para evitar que quien carga más informes tenga mayor peso.
 
 ## Comandos útiles
 

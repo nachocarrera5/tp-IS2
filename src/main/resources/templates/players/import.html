@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Importar jugadores · ScoutMatch</title>
+    <link href="/css/app.css" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="page narrow">
+    <div th:replace="~{fragments :: flash}"></div>
+    <a class="back" href="/players">← Jugadores</a>
+    <section class="page-head">
+        <div>
+            <p class="eyebrow">IMPORTACIÓN CONTROLADA</p>
+            <h1>Importar CSV</h1>
+            <p class="muted">Primero validamos cada fila. Nada se guarda hasta que confirmes.</p>
+        </div>
+    </section>
+    <form class="upload-zone" action="/players/import/preview" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <span class="upload-icon">↥</span>
+        <strong>Seleccioná un archivo CSV</strong>
+        <small>external_id, full_name, birth_date, nationality, club, league, preferred_foot, primary_position, secondary_positions</small>
+        <input type="file" name="file" accept=".csv,text/csv" required>
+        <button class="btn primary">Validar archivo</button>
+    </form>
+
+    <section th:if="${rows}" class="section-block">
+        <form action="/players/import/confirm" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="section-title">
+                <div><p class="eyebrow">VISTA PREVIA</p><h2 th:text="${fileName}"></h2></div>
+                <button class="btn primary">Confirmar decisiones</button>
+            </div>
+            <div class="data-table compact">
+                <div class="table-head"><span>Fila</span><span>Jugador</span><span>Posición</span><span>Estado / decisión</span></div>
+                <div class="table-row static" th:each="row:${rows}">
+                    <strong th:text="${row.row}"></strong>
+                    <span th:text="${row.player != null ? row.player.fullName : '—'}"></span>
+                    <span th:text="${row.player != null ? row.player.primaryPosition.label() : '—'}"></span>
+                    <span th:if="${row.error != null}" class="status bad" th:text="${row.error}"></span>
+                    <span th:if="${row.error == null and row.duplicateId == null}" class="status good">Lista para importar</span>
+                    <label th:if="${row.error == null and row.duplicateId != null}" class="duplicate-choice">
+                        <span class="status warning">Duplicado detectado</span>
+                        <select th:name="|decision_${row.row}|">
+                            <option value="SKIP">Omitir</option>
+                            <option value="UPDATE">Actualizar ficha</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
