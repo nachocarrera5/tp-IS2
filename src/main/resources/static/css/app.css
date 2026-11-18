@@ -80,6 +80,13 @@ button { cursor: pointer; }
 .table-row div span, .table-row div strong, .table-row div small { display: block; }
 .table-row small { margin-top: .25rem; color: var(--muted); }
 .table-row .arrow { color: var(--accent); }
+.players-table .table-head { grid-template-columns: 1.5fr 1.3fr 1.1fr .7fr 30px 110px; }
+.players-table .player-list-row { grid-template-columns: minmax(0,1fr) 110px; }
+.player-list-link { display: grid; grid-template-columns: 1.5fr 1.3fr 1.1fr .7fr 30px; gap: 1rem; align-items: center; min-width: 0; color: inherit; text-decoration: none; }
+.player-list-link > div { min-width: 0; }
+.player-list-link:hover { color: var(--accent); }
+.player-list-row form { margin: 0; }
+.player-list-row .follow-button { min-height: 36px; padding: .5rem .75rem; font-size: .75rem; }
 .data-table.compact .table-head, .data-table.compact .table-row { grid-template-columns: 60px 1fr 1fr 1.6fr; }
 .table-row.static:hover { background: transparent; }
 
@@ -121,6 +128,7 @@ legend { margin-bottom: .7rem; color: var(--muted); font-size: .78rem; }
 .evaluation-layout { display: grid; grid-template-columns: minmax(300px,.8fr) minmax(500px,1.2fr); gap: 2rem; align-items: start; }
 .attribute-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
 .attribute-control { display: grid; grid-template-columns: 1fr 80px; align-items: center; gap: 1rem; padding: .8rem; border-bottom: 1px solid var(--line); }
+.attribute-control[hidden], .criterion-card[hidden] { display: none !important; }
 .attribute-control span strong, .attribute-control span small { display: block; }
 .attribute-control small { margin-top: .2rem; color: var(--muted); font-size: .65rem; }
 .sticky-actions { position: sticky; bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: 12px; background: rgba(17,23,20,.94); backdrop-filter: blur(12px); }
@@ -224,6 +232,10 @@ legend { margin-bottom: .7rem; color: var(--muted); font-size: .78rem; }
     .metric-grid article, .info-strip div { border-right: 0; border-bottom: 1px solid var(--line); }
     .table-head { display: none; }
     .table-row { grid-template-columns: 1fr; }
+    .players-table .player-list-row { grid-template-columns: 1fr; gap: .7rem; }
+    .player-list-link { grid-template-columns: 1fr; }
+    .player-list-row form { width: 100%; }
+    .player-list-row .follow-button { width: 100%; }
     .table-row .arrow { display: none; }
     .check-grid { grid-template-columns: 1fr 1fr; }
     .ranking-card { grid-template-columns: 40px 1fr; padding: 1rem; }

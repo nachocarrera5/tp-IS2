@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Evaluar jugador · ScoutMatch</title>
     <link href="/css/app.css" rel="stylesheet">
+    <script src="/js/position-attributes.js" defer></script>
 </head>
 <body>
 <header th:replace="~{fragments :: nav}"></header>
@@ -29,7 +30,7 @@
                        th:value="${evaluation?.observationDate ?: #temporals.format(#temporals.createToday(),'yyyy-MM-dd')}" required>
             </label>
             <label>Posición observada
-                <select name="observedPosition" required>
+                <select name="observedPosition" data-attribute-position-filter required>
                     <option th:each="position:${positions}" th:value="${position}" th:text="${position.label()}"
                             th:selected="${evaluation != null ? evaluation.observedPosition == position : player.primaryPosition == position}"></option>
                 </select>
@@ -42,7 +43,9 @@
         </section>
         <section>
             <div class="attribute-grid">
-                <label class="attribute-control" th:each="attribute:${attributes}">
+                <label class="attribute-control" data-attribute-option
+                       th:attr="data-goalkeeper-only=${attribute.category == 'GOALKEEPER'}, data-goalkeeper-shared=${attribute.type.name() == 'AERIAL_PLAY'}"
+                       th:each="attribute:${attributes}">
                     <span><strong th:text="${attribute.name}"></strong><small th:text="${attribute.category}"></small></span>
                     <input type="number" min="1" max="10" th:name="|score_${attribute.type.name()}|"
                            th:value="${evaluation != null ? evaluation.scores.get(attribute.type) : 7}" required>

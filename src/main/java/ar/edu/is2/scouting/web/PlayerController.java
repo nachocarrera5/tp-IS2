@@ -4,6 +4,7 @@ import ar.edu.is2.scouting.domain.player.EvaluationService;
 import ar.edu.is2.scouting.domain.player.CsvImportService;
 import ar.edu.is2.scouting.domain.player.PlayerService;
 import ar.edu.is2.scouting.domain.player.Position;
+import ar.edu.is2.scouting.domain.search.CandidateService;
 import jakarta.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,13 +29,17 @@ public class PlayerController {
     private final PlayerService players;
     private final EvaluationService evaluations;
     private final CsvImportService csvImports;
-    public PlayerController(PlayerService players, EvaluationService evaluations, CsvImportService csvImports) {
-        this.players = players; this.evaluations = evaluations; this.csvImports = csvImports;
+    private final CandidateService candidates;
+    public PlayerController(PlayerService players, EvaluationService evaluations, CsvImportService csvImports,
+            CandidateService candidates) {
+        this.players = players; this.evaluations = evaluations; this.csvImports = csvImports; this.candidates = candidates;
     }
 
     @GetMapping("/players")
     String list(@RequestParam(required = false) String q, Model model) {
-        model.addAttribute("players", players.findAll(q)); model.addAttribute("q", q); return "players/list";
+        model.addAttribute("players", players.findAll(q)); model.addAttribute("q", q);
+        model.addAttribute("followedPlayerIds", candidates.followedPlayerIds());
+        return "players/list";
     }
 
     @GetMapping("/players/{id}")

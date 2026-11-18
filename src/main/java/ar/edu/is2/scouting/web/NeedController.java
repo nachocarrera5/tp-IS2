@@ -31,7 +31,7 @@ public class NeedController {
     String list(Model model) { model.addAttribute("needs", searches.findAll()); return "needs/list"; }
 
     @GetMapping("/needs/new")
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String form(Model model) { prepare(model); return "needs/form"; }
 
     @GetMapping("/needs/{id}")
@@ -40,7 +40,7 @@ public class NeedController {
     }
 
     @GetMapping("/needs/{id}/version")
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String version(@PathVariable long id, Model model) {
         var need = searches.findNeed(id);
         model.addAttribute("need", need);
@@ -53,7 +53,7 @@ public class NeedController {
     }
 
     @PostMapping({"/needs", "/needs/{id}/version"})
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String save(@PathVariable(required = false) Long id, @RequestParam String title, @RequestParam(required = false) String description,
             @RequestParam Position position, @RequestParam(required = false) String league,
             @RequestParam(required = false) Integer minimumAge, @RequestParam(required = false) Integer maximumAge,
@@ -74,14 +74,14 @@ public class NeedController {
     }
 
     @PostMapping("/needs/{id}/execute")
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String execute(@PathVariable long id, Principal principal, RedirectAttributes redirect) {
         try { long execution = searches.execute(id, principal.getName()); return "redirect:/rankings/" + execution; }
         catch (IllegalArgumentException exception) { redirect.addFlashAttribute("error", exception.getMessage()); return "redirect:/needs/" + id; }
     }
 
     @PostMapping("/needs/{id}/close")
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String close(@PathVariable long id, RedirectAttributes redirect) {
         searches.close(id); redirect.addFlashAttribute("success", "Necesidad cerrada; el historial permanece disponible"); return "redirect:/needs/" + id;
     }
@@ -90,7 +90,7 @@ public class NeedController {
     String ranking(@PathVariable long id, Model model) { model.addAttribute("execution", searches.findExecution(id)); return "needs/ranking"; }
 
     @PostMapping("/rankings/results/{resultId}/select")
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String select(@PathVariable long resultId, @RequestParam long executionId, Principal principal, RedirectAttributes redirect) {
         try { long candidate = candidates.select(resultId, principal.getName()); redirect.addFlashAttribute("success", "Jugador incorporado al seguimiento"); return "redirect:/candidates/" + candidate; }
         catch (IllegalArgumentException exception) { redirect.addFlashAttribute("error", exception.getMessage()); return "redirect:/rankings/" + executionId; }

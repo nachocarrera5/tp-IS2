@@ -25,8 +25,21 @@ public class CandidateController {
         model.addAttribute("statuses", CandidateService.CandidateStatus.values()); return "candidates/detail";
     }
 
+    @PostMapping("/players/{playerId}/follow")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
+    String followPlayer(@PathVariable long playerId, Principal principal, RedirectAttributes redirect) {
+        try {
+            long candidate = candidates.followManually(playerId, principal.getName());
+            redirect.addFlashAttribute("success", "Jugador incorporado al seguimiento");
+            return "redirect:/candidates/" + candidate;
+        } catch (IllegalArgumentException exception) {
+            redirect.addFlashAttribute("error", exception.getMessage());
+            return "redirect:/players";
+        }
+    }
+
     @PostMapping("/candidates/{id}/status")
-    @PreAuthorize("hasRole('COORDINATOR')")
+    @PreAuthorize("hasAnyRole('COORDINATOR', 'DIRECTOR')")
     String status(@PathVariable long id, @RequestParam CandidateService.CandidateStatus status,
             @RequestParam(required = false) String reason, Principal principal, RedirectAttributes redirect) {
         try { candidates.changeStatus(id, status, reason, principal.getName()); redirect.addFlashAttribute("success", "Estado actualizado"); }

@@ -40,6 +40,10 @@ public class EvaluationService {
                         rs.getString("display_name"), rs.getString("category"), rs.getString("description")));
     }
 
+    public List<AttributeRow> attributes(Position position) {
+        return attributes().stream().filter(attribute -> attribute.type().isAvailableFor(position)).toList();
+    }
+
     public List<EvaluationRow> forPlayer(long playerId) {
         return jdbc.query("""
                 select e.*,p.full_name player_name,u.full_name scout_name from evaluation e
@@ -114,7 +118,7 @@ public class EvaluationService {
             }, key);
             id = ((Number) key.getKeys().get("id")).longValue();
         }
-        for (var attribute : attributes()) {
+        for (var attribute : attributes(position)) {
             jdbc.update("insert into evaluation_score(evaluation_id,attribute_id,score_value) values (?,?,?)",
                     id, attribute.id(), scores.get(attribute.type()));
         }
@@ -167,7 +171,11 @@ public class EvaluationService {
     private static void validate(LocalDate date, Position position, Map<AttributeType, Integer> scores) {
         if (date == null || date.isAfter(LocalDate.now())) throw new IllegalArgumentException("La fecha de observación no es válida");
         if (position == null) throw new IllegalArgumentException("La posición observada es obligatoria");
+        if (scores.keySet().stream().anyMatch(attribute -> !attribute.isAvailableFor(position))) {
+            throw new IllegalArgumentException("La evaluación incluye atributos que no corresponden a la posición observada");
+        }
         for (AttributeType type : AttributeType.values()) {
+            if (!type.isAvailableFor(position)) continue;
             Integer score = scores.get(type);
             if (score == null || score < 1 || score > 10) throw new IllegalArgumentException("Todos los atributos deben tener un valor entre 1 y 10");
         }

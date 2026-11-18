@@ -7,8 +7,8 @@
   <section th:each="lane:${T(ar.edu.is2.scouting.domain.search.CandidateService.CandidateStatus).values()}">
     <div class="pipeline-title"><span th:text="${lane.name() == 'DETECTED' ? 'Detectado' : lane.name() == 'UNDER_OBSERVATION' ? 'En observación' : lane.name() == 'SHORTLISTED' ? 'Preseleccionado' : lane.name() == 'RECOMMENDED' ? 'Recomendado' : 'Descartado'}"></span><strong>•</strong></div>
     <a class="candidate-card" th:each="candidate:${candidates}" th:if="${candidate.status == lane}" th:href="@{/candidates/{id}(id=${candidate.id})}">
-      <p class="eyebrow" th:text="|${candidate.needTitle} · v${candidate.needVersion}|"></p><h3 th:text="${candidate.playerName}"></h3><span th:text="${candidate.club ?: 'Sin club'}"></span>
-      <div><strong th:text="${candidate.sourcePercentage != null ? candidate.sourcePercentage + '%' : 'Sin porcentaje'}"></strong><span>Origen →</span></div>
+      <p class="eyebrow" th:text="${candidate.needTitle != null ? candidate.needTitle + ' · v' + candidate.needVersion : 'Seguimiento manual'}"></p><h3 th:text="${candidate.playerName}"></h3><span th:text="${candidate.club ?: 'Sin club'}"></span>
+      <div><strong th:text="${candidate.sourcePercentage != null ? candidate.sourcePercentage + '%' : candidate.needTitle != null ? 'Sin porcentaje' : 'Seguimiento manual'}"></strong><span>Origen →</span></div>
     </a>
   </section>
 </div></main></body></html>

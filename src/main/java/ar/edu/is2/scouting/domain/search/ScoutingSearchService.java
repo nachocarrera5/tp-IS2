@@ -216,7 +216,12 @@ public class ScoutingSearchService {
         if (input.criteria() == null || input.criteria().isEmpty()) throw new IllegalArgumentException("Elegí al menos un criterio deportivo");
         long distinct = input.criteria().stream().map(CriterionInput::attribute).distinct().count();
         if (distinct != input.criteria().size()) throw new IllegalArgumentException("No se puede repetir un atributo");
-        input.criteria().forEach(c -> new CompatibilityCriterion(c.attribute(), c.target(), c.weight(), c.minimum()));
+        input.criteria().forEach(c -> {
+            if (!c.attribute().isAvailableFor(input.position())) {
+                throw new IllegalArgumentException("El atributo " + c.attribute().label() + " no corresponde a la posición elegida");
+            }
+            new CompatibilityCriterion(c.attribute(), c.target(), c.weight(), c.minimum());
+        });
     }
 
     private long insert(String sql, SqlBinder binder) {
