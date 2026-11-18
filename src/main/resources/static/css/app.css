@@ -94,6 +94,10 @@ button { cursor: pointer; }
 .tag, .status, .count-badge { display: inline-flex; width: fit-content; padding: .38rem .65rem; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: .72rem; font-weight: 700; }
 .tag.accent, .status.good { color: var(--accent); border-color: rgba(101,214,138,.35); background: rgba(101,214,138,.08); }
 .status.bad { color: var(--danger); border-color: rgba(255,121,111,.35); }
+.status.pending { flex: 0 0 auto; align-self: flex-start; color: #f2c66d; border-color: rgba(242,198,109,.35); background: rgba(242,198,109,.08); }
+.card-grid.draft-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.draft-card { max-width: 760px; }
+.draft-card .item-head { align-items: flex-start; }
 .player-hero, .candidate-hero, .ranking-head { display: flex; justify-content: space-between; align-items: center; gap: 2rem; min-height: 280px; }
 .player-hero { display: grid; grid-template-columns: auto 1fr auto; }
 .shirt-number, .huge-number { color: transparent; -webkit-text-stroke: 1px rgba(101,214,138,.45); font: 700 clamp(5rem,11vw,10rem) Georgia, serif; line-height: 1; }
